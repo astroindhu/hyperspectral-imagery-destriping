@@ -167,6 +167,31 @@ You can narrow which files are processed using `--glob`, for example:
 
 ---
 
+---
+
+## 4b) Batch pipeline: destripe + PCA + plots (one command)
+
+If you want to destripe *and* generate PCA outputs and PNG figures for every file in a directory, use `batch_pipeline.py`.
+
+### Run PCA and plots for BOTH the input (raw) cube and the destriped cube
+
+```bash
+python batch_pipeline.py   --data_dir "/path/to/raw_datasets"   --out_dir  "/path/to/processed_datasets"   --include "rad_emiss"   --suffix "_destriped"   --run_pca   --pca_on both   --pca_variance 0.99   --make_plots   --plots_on both   --band 20   --overwrite
+```
+
+Outputs (per input file):
+- destriped ENVI: `*_destriped.hdr` + `*_destriped.img`
+- PCA (raw): `*_destriped.raw.pca.npz`
+- PCA (destriped): `*_destriped.destriped.pca.npz`
+- figures: saved under `.../<same_folder>/figs/` (raw + destriped band images, scree plots, PCA RGBs)
+
+Tip: do a dry run first:
+
+```bash
+python batch_pipeline.py --data_dir "/path/to/raw" --out_dir "/path/to/proc" --include "rad_emiss" --dry_run
+```
+
+
 ## 5) Optional: PCA (quick-look QA)
 
 ```bash
@@ -219,3 +244,8 @@ If the cube contains large non-target regions—such as atmosphere/sky pixels, v
 As a result, the moment-matching correction may become less effective and can lead to over-correction or under-correction of the actual target surface.
 
 Recommendation: mask the cube to include only ROI pixels before running the moment-matching row correction.
+
+---
+
+## License
+This project is licensed under the MIT License.

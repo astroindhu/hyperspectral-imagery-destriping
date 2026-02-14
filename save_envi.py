@@ -49,6 +49,12 @@ def write_envi_cube(
     cube = np.asarray(cube, dtype=dtype)
 
     md = sanitize_metadata(metadata or {})
+    # Preserve interleave from input metadata unless explicitly overridden
+    if "interleave" in md and interleave == "bsq":
+        try:
+            interleave = str(md.get("interleave", interleave)).lower()
+        except Exception:
+            pass
     md["lines"] = str(cube.shape[0])
     md["samples"] = str(cube.shape[1])
     md["bands"] = str(cube.shape[2])
@@ -69,7 +75,7 @@ def write_envi_cube(
         interleave=interleave,
         metadata=md,
     )
-    return out_hdr_path, out_hdr_path.with_suffix(".dat")
+    return out_hdr_path, out_hdr_path.with_suffix(".img")
 
 
 def main():

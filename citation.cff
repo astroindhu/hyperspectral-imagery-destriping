@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Moment-matching Row Correction for ENVI Hyperspectral Cubes"
+type: software
+authors:
+  - family-names: "Varatharajan"
+    given-names: "Indhu"
+    affiliation: "Stony Brook University, Center for Planetary Exploration (CPEx)"
+version: 1.0.0
+date-released: 2026-02-13
+license: MIT
+keywords:
+  - hyperspectral imaging
+  - ENVI
+  - destriping
+  - remote sensing
+  - emissivity
+  - spectroscopy
+  - preprocessing
+  - moment matching
+repository-code: "https://github.com/astroindhu/hyperspectral-imagery-destriping"
+url: "https://github.com/astroindhu/hyperspectral-imagery-destriping"
