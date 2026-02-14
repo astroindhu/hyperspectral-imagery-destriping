@@ -44,20 +44,23 @@ If a row contains fewer than `min_valid_per_row` valid pixels, the correction is
   Find `.hdr` files, load ENVI cubes, create a valid-pixel mask (non-zero spectra), flatten/restore helpers.
 
 - `save_envi.py`  
-  Writes ENVI `.hdr` + `.img` with metadata preservation (used by `destripe.py` and `batch_run.py`).
+  Writes ENVI `.hdr` + `.img` with metadata preservation (used by destriping + batch workflows).
 
 - `destripe.py`  
   **Moment-matching row correction** (masked).  
-  **This is the main script most users run for a single file.**
+  Main script for running destriping on a single cube.
 
 - `batch_run.py`  
-  Batch runner: recursively scans a directory for `.hdr` files and processes them all.
+  Batch destriping runner: recursively scans a directory for `.hdr` files and destripes them.
+
+- `batch_pipeline.py`  
+  Batch **pipeline** runner: destripes cubes and (optionally) runs **PCA + plots** for **raw and/or destriped** outputs.
 
 - `pca.py` (optional)  
-  PCA analysis of a cube → saves `pca_outputs.npz`.
+  PCA analysis utilities; batch_pipeline can save PCA outputs as `.npz`.
 
 - `plot.py` (optional)  
-  Saves PNG figures (raw vs processed band, PCA scree, PCA RGB).
+  Plotting utilities; batch_pipeline can save PNG figures (band images + PCA scree/RGB).
 
 ---
 
