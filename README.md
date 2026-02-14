@@ -9,11 +9,11 @@ This repo contains a **simple, reusable** Python implementation of *moment match
 ---
 
 
-## How the destriping works (moment-matching row correction)
+## Moment-matching row correction - explained
 
 Many hyperspectral cubes contain **horizontal striping artifacts**, caused by detector row-to-row gain/offset variations or scan-line calibration differences. These appear as systematic brightness differences across image rows, often consistent across spectral bands.
 
-This repository implements a **moment-matching row correction** algorithm that removes such striping while preserving real spectral variability.
+This repository implements a **moment-matching row correction** algorithm that removes such striping while preserving real spectral variability. This approach corrects both **row-dependent offsets** (mean shifts) and **row-dependent gain variations** (standard deviation scaling). Because the correction is done independently for each band, it preserves spectral shape and real spatial variability while reducing striping artifacts.
 
 ### Algorithm (per band)
 
@@ -34,10 +34,6 @@ x_corr = (x - μ_row) / σ_row * σ_global + μ_global
 ### Sparse-row protection
 
 If a row contains fewer than `min_valid_per_row` valid pixels, the correction is skipped for that row to prevent unstable statistics.
-
-### Why this works
-
-This approach corrects both **row-dependent offsets** (mean shifts) and **row-dependent gain variations** (standard deviation scaling). Because the correction is done independently for each band, it preserves spectral shape and real spatial variability while reducing striping artifacts.
 
 ---
 
@@ -66,7 +62,7 @@ This approach corrects both **row-dependent offsets** (mean shifts) and **row-de
 ---
 
 
-## 1) Install Python (easy option)
+## 1) Install Python
 
 **Recommended:** install **Miniconda** (lightweight Python distribution).
 
@@ -102,6 +98,7 @@ Download this repo (or copy these `.py` files) into a folder, e.g.
 moment_matching/
   destripe.py
   batch_run.py
+  batch_pipeline.py
   load_data.py
   save_envi.py
   pca.py
