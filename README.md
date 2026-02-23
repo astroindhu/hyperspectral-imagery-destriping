@@ -1,4 +1,4 @@
-# Moment-matching row correction (ENVI HSI destriping)
+# Moment-matching row correction (HSI destriping)
 
 This repo contains a **simple, reusable** Python implementation of *moment matching row correction* for ENVI hyperspectral cubes.
 
